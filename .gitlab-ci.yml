@@ -4,8 +4,7 @@ cache:
     key: shared-yarn-cache
     untracked: true
     paths:
-        - node_modules/
-        - .yarn
+        - .yarn-cache
 
 stages:
     - install
@@ -24,7 +23,7 @@ install:
             - packages/**
             - .gitlab-ci.yml
     script:
-        - yarn install --frozen-lockfile
+        - yarn install --frozen-lockfile --cache-folder .yarn-cache
         - $(yarn bin)/cypress cache path
         - $(yarn bin)/cypress cache list
         - $(yarn bin)/cypress verify
