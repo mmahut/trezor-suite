@@ -3,6 +3,8 @@
 suite-web lint:
     stage: lint
     script:
+        - pwd
+        - hostname
         - env
         - yarn workspace @trezor/suite-web lint
     only:

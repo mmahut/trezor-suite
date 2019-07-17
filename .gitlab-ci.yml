@@ -1,7 +1,7 @@
 image: node:lts
 
 cache:
-    key: shared-yarn-cache
+    key: $CI_BUILD_REF_NAME
     untracked: true
     paths:
         - node_modules/
@@ -12,6 +12,8 @@ cache:
         - packages/suite-native/node_modules/
         - packages/components/node_modules/
         - packages/components-storybook/node_modules/
+        - packages/blockchain-link/node_modules/
+        - packages/translations-manager/node_modules/
 
 stages:
     - install
@@ -30,6 +32,8 @@ install:
             - packages/**
             - .gitlab-ci.yml
     script:
+        - pwd
+        - hostname
         - yarn install --frozen-lockfile
         - $(yarn bin)/cypress cache path
         - $(yarn bin)/cypress cache list
