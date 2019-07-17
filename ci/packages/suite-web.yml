@@ -2,6 +2,12 @@
 
 suite-web lint:
     stage: lint
+    cache:
+        key: $CI_BUILD_REF_NAME
+        paths:
+            - node_modules/
+            - packages/suite/node_modules/
+            - packages/suite-web/node_modules/
     script:
         - pwd
         - ls node_modules
