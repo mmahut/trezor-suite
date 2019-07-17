@@ -4,7 +4,14 @@ cache:
     key: shared-yarn-cache
     untracked: true
     paths:
-        - .yarn-cache
+        - .yarn-cache/
+        - packages/rollout/node_modules/
+        - packages/suite/node_modules/
+        - packages/suite-web/node_modules/
+        - packages/suite-desktop/node_modules/
+        - packages/suite-native/node_modules/
+        - packages/components/node_modules/
+        - packages/components-storybook/node_modules/
 
 stages:
     - install
