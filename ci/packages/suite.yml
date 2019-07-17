@@ -32,6 +32,10 @@ suite test unit:
 
 suite test integration:
     stage: test integration
+    before_script:
+        - apt-get update
+        - apt-get install -y build-essential
+        - apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 --assume-yes
     script:
         - yarn workspace @trezor/suite test:health
     only:
