@@ -4,7 +4,7 @@ cache:
     key: shared-yarn-cache
     untracked: true
     paths:
-        - .yarn-cache/
+        - node_modules/
         - packages/rollout/node_modules/
         - packages/suite/node_modules/
         - packages/suite-web/node_modules/
@@ -30,7 +30,7 @@ install:
             - packages/**
             - .gitlab-ci.yml
     script:
-        - yarn install --frozen-lockfile --cache-folder .yarn-cache
+        - yarn install --frozen-lockfile
         - $(yarn bin)/cypress cache path
         - $(yarn bin)/cypress cache list
         - $(yarn bin)/cypress verify
