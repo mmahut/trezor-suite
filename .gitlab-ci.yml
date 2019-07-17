@@ -2,6 +2,7 @@ image: node:lts
 
 cache:
     key: shared-yarn-cache
+    untracked: true
     paths:
         - node_modules/
         - .yarn
