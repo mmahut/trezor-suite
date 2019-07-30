@@ -17,7 +17,7 @@ declare const LOCAL: string;
 let inited = false;
 
 const TrezorConnectService = store => next => action => {
-    // Pass all actions through by default
+    // Pass all actions through by default 
     next(action);
 
     if (action.type === LOCATION_CHANGE && !inited) {
@@ -68,7 +68,7 @@ const TrezorConnectService = store => next => action => {
                 email: 'info@trezor.io',
                 appUrl: window.location.host,
             },
-        // @ts-ignore connect
+            // @ts-ignore connect
         }).catch(error => {
             console.log('ERROR', error);
         });
