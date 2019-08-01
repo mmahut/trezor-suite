@@ -46,8 +46,8 @@ export const init = () => async (dispatch: Dispatch) => {
 
     try {
         await TrezorConnect.init({
-            connectSrc: 'https://connect.sldev.cz/connect-electron/',
-            // connectSrc: 'https://localhost:8088/',
+            // connectSrc: 'https://connect.sldev.cz/connect-electron/',
+            connectSrc: 'https://localhost:8088/',
             transportReconnect: true,
             debug: false,
             popup: false,
@@ -76,3 +76,15 @@ export const forgetDevice = (device: TrezorDevice): Action => ({
     type: CONNECT.FORGET_REQUEST,
     device,
 });
+
+// @ts-ignore
+export const applySettings = params => async () => {
+    // @ts-ignore
+    TrezorConnect.applySettings(params);
+};
+
+// @ts-ignore
+export const changePin = params => async () => {
+    // @ts-ignore
+    TrezorConnect.changePin(params);
+};
