@@ -46,8 +46,8 @@ export const init = () => async (dispatch: Dispatch) => {
 
     try {
         await TrezorConnect.init({
-            // connectSrc: 'https://connect.sldev.cz/connect-electron/',
-            connectSrc: 'https://localhost:8088/',
+            connectSrc: 'https://connect.sldev.cz/connect-electron/',
+            // connectSrc: 'https://localhost:8088/',
             transportReconnect: true,
             debug: false,
             popup: false,
