@@ -57,8 +57,6 @@ const TrezorConnectService = store => next => action => {
             // This needs to be explicity set to make address validation work
         });
 
-        
-
         TrezorConnect.init({
             connectSrc: 'https://sisyfos.sldev.cz/connect-electron/',
             webusb: true,
