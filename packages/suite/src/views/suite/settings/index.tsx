@@ -130,7 +130,7 @@ const Settings = ({ device, applySettings, changePin }: Props) => {
             </Row>
 
             {/* 
-            TODO for both:
+                TODO for both:
                 { name: 'homescreen', type: 'string' },
             */}
 
