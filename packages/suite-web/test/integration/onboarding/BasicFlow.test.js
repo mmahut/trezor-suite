@@ -3,6 +3,8 @@ describe('Basic onboarding flow', () => {
         cy.viewport(1024, 768).visit('/onboarding');
     });
 
+    // just some change to trigger ci. 
+    
     it(`used device skips device selection and hologram step`, () => {
             cy.get('html')
             .should('contain', 'Welcome to Trezor')
