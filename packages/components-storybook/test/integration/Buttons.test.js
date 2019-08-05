@@ -4,55 +4,31 @@ describe('Buttons', () => {
         cy.visit('/iframe.html?selectedKind=Buttons&selectedStory=All&full=0');
     });
 
-    it('buttons', () => {
-        [
-            'button_loading_success',
-            'button_loading_info',
-            'button_loading_warning',
-            'button_loading_error',
-            'button_loading_white',
-            'button_loading_transparent',
-            'button_loading_disabled',
-            'button_inverse_success',
-            'button_inverse_info',
-            'button_inverse_warning',
-            'button_inverse_error',
-            'button_inverse_white',
-            'button_inverse_transparent',
-            'button_inverse_disabled',
-        ].forEach(testName => {
-            it(`${testName}`, () => {
-                cy.getTestElement(testName)
-                    .should('be.visible')
-                    .matchImageSnapshot();
-            });
+    [
+        'button_loading_success',
+        'button_loading_info',
+        'button_loading_warning',
+        'button_loading_error',
+        'button_loading_white',
+        'button_loading_transparent',
+        'button_loading_disabled',
+        'button_inverse_success',
+        'button_inverse_info',
+        'button_inverse_warning',
+        'button_inverse_error',
+        'button_inverse_white',
+        'button_inverse_transparent',
+        'button_inverse_disabled',
+    ].forEach(testName => {
+        it(`${testName}`, () => {
+            cy.getTestElement(testName)
+                .should('be.visible')
+                .find('.loading-svg')
+                .should('not.be.visible');
+
+            cy.getTestElement(testName)
+                .matchImageSnapshot();
         });
     });
 
-    it('buttons with icons', () => {
-        [
-            'button_icon_success',
-            'button_icon_info',
-            'button_icon_warning',
-            'button_icon_error',
-            'button_icon_white',
-            'button_icon_transparent',
-            'button_icon_disabled',
-            'button_inverse_icon_success',
-            'button_inverse_icon_info',
-            'button_inverse_icon_warning',
-            'button_inverse_icon_error',
-            'button_inverse_icon_white',
-            'button_inverse_icon_transparent',
-            'button_inverse_icon_disabled',
-        ].forEach(testName => {
-            it(`${testName}`, () => {
-                cy.getTestElement(testName)
-                    .should('be.visible')
-                    .find('.loading-svg')
-                    .should('not.be.visible')
-                    .matchImageSnapshot();
-            });
-        });
-    });
 });

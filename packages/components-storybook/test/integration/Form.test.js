@@ -64,7 +64,9 @@ describe('Form', () => {
             cy.getTestElement(testName)
                 .should('be.visible')
                 .find('.loading-svg')
-                .should('not.be.visible')
+                .should('not.be.visible');
+
+            cy.getTestElement(testName)
                 .matchImageSnapshot();
         });
     });
