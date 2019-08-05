@@ -3,6 +3,10 @@ module.exports = {
     globals: {
         'ts-jest': {
             tsConfig: 'tsconfig.json',
+            // diagnostics: {
+            //     warnOnly: true,
+            // },
+            diagnostics: false,
         },
     },
     moduleNameMapper: {
@@ -19,7 +23,7 @@ module.exports = {
     },
     moduleFileExtensions: ['js', 'ts'],
     coverageDirectory: './coverage',
-    collectCoverage: true,
+    collectCoverage: false,
     collectCoverageFrom: [
         '<rootDir>/src/reducers/**',
         '<rootDir>/src/utils/**',
@@ -32,4 +36,6 @@ module.exports = {
         '^.+\\.(ts)$': 'ts-jest',
     },
     preset: 'ts-jest',
+    setupFiles: ['jest-canvas-mock'],
+    testEnvironmentOptions: { resources: 'usable' },
 };

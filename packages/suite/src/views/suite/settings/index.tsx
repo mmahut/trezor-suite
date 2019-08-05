@@ -1,8 +1,96 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Input, Button, P } from '@trezor/components';
+import { Input, Button, P, Icon } from '@trezor/components';
 import { AppState } from '@suite-types/index';
+import { resolveStaticPath } from '@suite-utils/nextjs';
+import elementToHomescreen from '@suite/utils/suite/elementToHomescreen';
+
+const IMAGE_NAMES_T1 = [
+    'original', // note - has to be first
+    'blank',
+    'circleweb',
+    'circuit',
+    'starweb',
+    'stars',
+    'bitcoin_b2',
+    'bitcoin_shade',
+    'bitcoin_b',
+    'bitcoin_full',
+
+    'bitcat',
+    'nyancat',
+
+    'coffee',
+    'flower',
+    'saturn',
+    'jupiter',
+    'einstein',
+
+    'piggy',
+
+    'honeybadger',
+    'dragon',
+    'narwal',
+    'rabbit',
+    'bunny',
+    'rooster',
+
+    'fancy',
+    'genesis',
+    'my_bank',
+    'candle',
+    'ancap',
+    'anonymous',
+
+    'mushroom',
+    'invader',
+
+    'mtgox',
+    'electrum',
+    'mycelium',
+
+    'ethereum',
+    'litecoin',
+    'myetherwallet',
+    'zcash',
+    'dash',
+    'bitcoin_cash',
+    'bitcoin_gold',
+    'vertcoin',
+    'namecoin',
+    'monacoin',
+    'doge',
+    'digibyte',
+    'decred',
+
+    'multibit',
+    'reddit',
+    'hacker',
+    'polis',
+];
+const IMAGE_NAMES_T2 = [
+    'default',
+    'trezor',
+    'btc',
+    'ltc',
+    'eth',
+    'doge',
+    'dash',
+    // 'xmr',
+    'zec',
+    'anonymous',
+    // 'polis',
+    'hodl',
+    'moon',
+    'bitcoin_gold',
+    'decred',
+    'digibyte',
+    'fujicoin',
+    'monacoin',
+    'namecoin',
+    'vertcoin',
+];
 
 const Wrapper = styled.div`
     display: flex;
@@ -44,6 +132,25 @@ const ActionButton = styled(Button)`
     min-width: 100px;
 `;
 
+const OrientationButton = styled(Button)`
+    margin-left: 3px;
+`;
+
+const BackgroundGallery = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+`;
+
+const BackgroundImageT2 = styled.img`
+    border-radius: 50%;
+    margin: 5px;
+`;
+
+const BackgroundImageT1 = styled.img`
+    margin: 5px;
+`;
+
 interface Props {
     // device: AppState['suite']['device'];
     device: any;
@@ -59,6 +166,14 @@ const Settings = ({ device, applySettings, changePin }: Props) => {
     }, [device.features.label, device.features.labels]);
 
     const { features } = device;
+
+    const setHomescreen = image => {
+        console.log(image);
+        const element = document.getElementById(image);
+        const hex = elementToHomescreen(element, device.features.major_version);
+        console.log({ hex });
+        applySettings({ homescreen: hex });
+    };
 
     return (
         <Wrapper>
@@ -129,9 +244,54 @@ const Settings = ({ device, applySettings, changePin }: Props) => {
                 </ActionCol>
             </Row>
 
+            {device.features.major_version === 2 && (
+                <Row>
+                    <LabelCol>
+                        <Label>Display rotation</Label>
+                    </LabelCol>
+                    <ActionCol>
+                        {[
+                            { icon: 'ARROW_UP', value: 0 },
+                            { icon: 'ARROW_RIGHT', value: 90 },
+                            { icon: 'ARROW_DOWN', value: 180 },
+                            { icon: 'ARROW_LEFT', value: 270 },
+                        ].map(variant => (
+                            <OrientationButton
+                                key={variant.icon}
+                                isWhite
+                                onClick={() => applySettings({ display_rotation: variant.value })}
+                            >
+                                <Icon icon={variant.icon} />
+                            </OrientationButton>
+                        ))}
+                    </ActionCol>
+                </Row>
+            )}
+
+            <BackgroundGallery>
+                {device.features.major_version === 1 &&
+                    IMAGE_NAMES_T1.map(image => (
+                        <BackgroundImageT1
+                            key={image}
+                            id={image}
+                            onClick={() => setHomescreen(image)}
+                            src={resolveStaticPath(`images/suite/homescreens/t1/${image}.png`)}
+                        />
+                    ))}
+
+                {device.features.major_version === 2 &&
+                    IMAGE_NAMES_T2.map(image => (
+                        <BackgroundImageT2
+                            key={image}
+                            id={image}
+                            onClick={() => setHomescreen(image)}
+                            src={resolveStaticPath(`images/suite/homescreens/t2/${image}.png`)}
+                        />
+                    ))}
+            </BackgroundGallery>
             {/* 
                 TODO for both:
-                { name: 'homescreen', type: 'string' },
+                { name: 'homescreen', type: 'string' }, custom load
             */}
 
             {/* 
