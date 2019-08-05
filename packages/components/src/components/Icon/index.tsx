@@ -37,6 +37,8 @@ const chooseIconAnimationType = (canAnimate?: boolean, isActive?: boolean) => {
     return null;
 };
 
+const Loading = styled.div``;
+
 const SvgWrapper = styled.div<WrapperProps>`
     display: inline-block;
     height: ${props => props.size}px;
@@ -99,6 +101,7 @@ const Icon = ({
         >
             <ReactSvg
                 src={ICONS[icon]}
+                loading={() => <Loading className="loading-svg" />}
                 beforeInjection={svg => {
                     svg.setAttribute('width', `${size}px`);
                     svg.setAttribute('height', `${size}px`);

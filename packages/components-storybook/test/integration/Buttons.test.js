@@ -49,8 +49,8 @@ describe('Buttons', () => {
             it(`${testName}`, () => {
                 cy.getTestElement(testName)
                     .should('be.visible')
-                    .find('svg')
-                    .should('be.visible')
+                    .find('.loading-svg')
+                    .should('not.be.visible')
                     .matchImageSnapshot();
             });
         });

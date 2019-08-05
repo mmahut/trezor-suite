@@ -63,6 +63,8 @@ describe('Form', () => {
         it(`${testName}`, () => {
             cy.getTestElement(testName)
                 .should('be.visible')
+                .find('.loading-svg')
+                .should('not.be.visible')
                 .matchImageSnapshot();
         });
     });

@@ -1,4 +1,7 @@
-import { icons, variables } from '@trezor/components';
+import {
+    icons,
+    variables
+} from '@trezor/components';
 
 describe('Other', () => {
     beforeEach(() => {
@@ -33,6 +36,8 @@ describe('Other', () => {
         it(`${testName}`, () => {
             cy.getTestElement(testName)
                 .should('be.visible')
+                .find('.loading-svg')
+                .should('not.be.visible')
                 .matchImageSnapshot();
         });
     });
