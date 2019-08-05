@@ -46,6 +46,12 @@ const Index: FunctionComponent<Props> = props => {
 
     // onboarding handles TrezorConnect events by itself
     // and display proper view (install bridge, connect/disconnect device etc.)
+    console.log('router.app', router.app);
+    console.log('router.app', router.app);
+    console.log('router.app', router.app);
+    console.log('router.app', router.app);
+    console.log('router.app', router.app);
+
     if (router.app === 'onboarding') {
         return <Layout fullscreenMode>{props.children}</Layout>;
     }
